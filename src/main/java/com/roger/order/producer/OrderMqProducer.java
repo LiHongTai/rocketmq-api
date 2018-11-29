@@ -40,6 +40,13 @@ public class OrderMqProducer {
                     body.getBytes(RemotingHelper.DEFAULT_CHARSET));
 
             SendResult sendResult = defaultMQProducer.send(msg, new MessageQueueSelector() {
+
+                //List<MessageQueue> msgQueList 消息要发送的Topic下的所有分区
+                //Message message 消息对象
+                // Object args 额外的参数，用户可以自己传递参数
+                // 比如为了把同一个订单的消息发送到同一个分区中，
+                // 可以把订单号作为一个参数传递过去然后mod分区个数，
+                // 就可以保证把同一个订单的消息发送到同一个分区中去
                 @Override
                 public MessageQueue select(List<MessageQueue> msgQueList, Message message, Object args) {
                     long orderId = (long) args;
