@@ -9,7 +9,6 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class OrderMqProducer {
         int orderCount = 5;
         for (int i = 0; i < orderCount; i++) {
             long orderId = SnowflakeIdWorker.getInstance().nextId();
-            OrderMqProducer.builderOrderMsgList(orderMsgList,orderId);
+            OrderMqProducer.builderOrderMsgList(orderMsgList, orderId);
         }
 
         for (int i = 0; i < orderMsgList.size(); i++) {
